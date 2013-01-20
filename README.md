@@ -6,7 +6,7 @@ n-dimensional scrabble engine in Java
 
 Ever wondered what would happen if you got 15 Scrabble sets and played a game of 3d Scrabble?
 
-Something like this
+Something like this (you'll need to view in raw txt format, no wrap)
 
 ***************** ***************** ***************** ***************** ***************** ***************** ***************** ***************** ***************** ***************** ***************** ***************** ***************** ***************** ***************** ***************** *****************  
 ***************** * G    M     O N* *         COXAL * * C    R     R  * *D           F  * *     HOARD  I T* * Y  NONGUILTS E* *RETE WN     HEW* * HARDENED     H* *          R  BI* * KYAR D   E   T* *   BIKIE  A  C * *    FIER  R    * *     T    O    * *CLUTCHED  S    * *  HOHED   EL   * *****************  
