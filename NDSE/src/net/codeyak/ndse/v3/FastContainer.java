@@ -1,7 +1,6 @@
-package net.codeyak.ndse.oo.gaddag;
+package net.codeyak.ndse.v3;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Random;
 
@@ -9,6 +8,7 @@ import net.codeyak.ndse.v1.Board;
 import net.codeyak.ndse.v1.LetterDistribution;
 import net.codeyak.ndse.v1.LetterValuation;
 import net.codeyak.ndse.v1.WordList;
+import net.codeyak.ndse.v3.gaddag.Generator;
 
 
 public class FastContainer {

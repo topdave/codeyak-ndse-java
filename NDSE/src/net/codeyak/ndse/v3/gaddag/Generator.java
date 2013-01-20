@@ -1,4 +1,4 @@
-package net.codeyak.ndse.oo.gaddag;
+package net.codeyak.ndse.v3.gaddag;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.codeyak.ndse.v1.WordList;
+import net.codeyak.ndse.v3.Magic;
 
 
 /**

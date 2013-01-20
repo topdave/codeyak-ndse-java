@@ -1,4 +1,4 @@
-package net.codeyak.ndse.oo.gaddag;
+package net.codeyak.ndse.v3;
 
 import net.codeyak.ndse.v1.LetterValuation;
 

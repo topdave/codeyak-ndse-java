@@ -1,4 +1,4 @@
-package net.codeyak.ndse.oo.gaddag;
+package net.codeyak.ndse.v3.gaddag;
 
 import java.util.Arrays;
 import java.util.Map;

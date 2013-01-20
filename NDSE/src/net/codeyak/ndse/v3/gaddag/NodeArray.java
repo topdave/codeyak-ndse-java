@@ -1,10 +1,11 @@
-package net.codeyak.ndse.oo.gaddag;
+package net.codeyak.ndse.v3.gaddag;
 
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.PriorityQueue;
+
+import net.codeyak.ndse.v3.Magic;
 
 public class NodeArray {
 	

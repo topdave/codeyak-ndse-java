@@ -1,4 +1,4 @@
-package net.codeyak.ndse.oo.gaddag;
+package net.codeyak.ndse.v3.gaddag;
 
 public class GenPowers {
 

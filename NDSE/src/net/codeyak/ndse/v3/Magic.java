@@ -1,16 +1,11 @@
-package net.codeyak.ndse.oo.gaddag;
+package net.codeyak.ndse.v3;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
-import java.util.Scanner;
 
 import net.codeyak.ndse.v1.LetterValuation;
 

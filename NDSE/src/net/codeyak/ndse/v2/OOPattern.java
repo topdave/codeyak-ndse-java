@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import net.codeyak.ndse.v1.RackIterator;
-import net.codeyak.ndse.v1.WordList;
-
 /**
  * A play placement pattern.
  * Consists of a list of OOSquare that need to be filled with tiles to make a valid play following this pattern.

@@ -1,5 +1,11 @@
-package net.codeyak.ndse.oo.gaddag;
+package net.codeyak.ndse.v3;
 
+/**
+ * fast implementation of a bit set
+ * 
+ * @author dave_blake
+ *
+ */
 public class FastBitSet {
 
 	int length;
