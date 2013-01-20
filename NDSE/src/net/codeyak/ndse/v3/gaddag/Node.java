@@ -11,25 +11,51 @@ public class Node {
 		return uidNext;
 	}
 	
+	public static Node[] allNodes = new Node[15000000];
+	
 	/**
 	 * 0 = A
 	 * ...
 	 * 25 = Z
 	 * 26 = REV
 	 */
-	Node[] next;
+	private Node[] next;
 	
-	boolean word;
+	private boolean validWord;
 	
 	private int hash;
 	
-	int uid = uidNext++;
+	private int uid = uidNext++;
 	
-	int freq;
+	int usageCount;
 	
-	int trav;
+	public Node() {
+		allNodes[uid] = this;
+	}
 	
-	int minDepth;
+	public boolean isValidWord() {
+		return validWord;
+	}
+	
+	public void setValidWord(boolean validWord) {
+		this.validWord = validWord;
+	}
+	
+	public boolean hasNext() {
+		return next != null;
+	}
+	
+	public int getUid() {
+		return uid;
+	}
+	
+	public Node getNext(int index) {
+		return next[index];
+	}
+	
+	public Node[] getNext() {
+		return next;
+	}
 	
 	@Override
 	public int hashCode() {
@@ -45,7 +71,7 @@ public class Node {
 		final int prime = 31;
 		hash = 1;
 		hash = prime * hash + Arrays.hashCode(next);
-		hash = prime * hash + (word ? 1231 : 1237);
+		hash = prime * hash + (validWord ? 1231 : 1237);
 	}
 
 
@@ -61,7 +87,7 @@ public class Node {
 		Node other = (Node) obj;
 		if (!Arrays.equals(next, other.next))
 			return false;
-		if (word != other.word)
+		if (validWord != other.validWord)
 			return false;
 		return true;
 	}
@@ -85,7 +111,7 @@ public class Node {
 	}
 	
 	public void print(String prefix) {
-		if (word) System.out.print('!');
+		if (validWord) System.out.print('!');
 		if (next != null) {
 			for (int i=0; i<next.length; i++) {
 				Node n = next[i];
@@ -128,35 +154,9 @@ public class Node {
 		}
 	}
 
-	public void setFreq() {
-		freq++;
-		if (next != null) {
-			for (Node n : next) {
-				if (n != null) {
-					n.setFreq();
-				}
-			}
-		}
+	public boolean hasNext(int index) {
+		return next != null && next[index] != null;
 	}
-	
-	public void setTrav(char[] cs, int p) {
-		trav++;
-		if (p < cs.length) {
-			char c = cs[p];
-			int i = (c == '#' ? 26 : (int)(c - 'A'));
-			next[i].setTrav(cs, p+1);
-		}
-	}
-	
-	public void setDepth(char[] cs, int p) {
-		trav++;
-		if (p < cs.length) {
-			char c = cs[p];
-			int i = (c == '#' ? 26 : (int)(c - 'A'));
-			Node n = next[i];
-			if (n.minDepth < p) n.minDepth = p;
-			n.setDepth(cs, p+1);
-		}
-	}
+
 
 }

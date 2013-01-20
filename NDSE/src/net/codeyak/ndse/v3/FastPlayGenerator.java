@@ -1,15 +1,19 @@
 package net.codeyak.ndse.v3;
 
 import net.codeyak.ndse.v1.LetterValuation;
+import net.codeyak.ndse.v3.gaddag.IGaddag;
+import net.codeyak.ndse.v3.gaddag.MagicGaddag;
 
 public final class FastPlayGenerator {
 
-	private final int[] data;
+	//private final int[] data;
 	
-	static final int[] freqs = new int[2000000];
+	//static final int[] freqs = new int[2000000];
 	
-	public FastPlayGenerator(int[] data) {
-		this.data = data;
+	private final IGaddag gaddag;
+	
+	public FastPlayGenerator(IGaddag gaddag) {
+		this.gaddag = gaddag;
 	}
 	
 	private LetterValuation letterValuation;
@@ -74,7 +78,6 @@ public final class FastPlayGenerator {
 	}
 	
 	private void gen(final int address, final int posId, final int wordScore, final int wordMultiplier, final int hookScore) {
-		if (freqs != null) freqs[address]++;
 		//consider letter mask (for hook points)
 		int lmask = (1 << 27) -1;
 		if (hookMaskMerged != null && fGrid.hookBitSet.isSet(posId)) {
@@ -87,21 +90,17 @@ public final class FastPlayGenerator {
 		//consider tiles already placed
 		final char c = fGrid.tileLetters[posId];
 		if (c > 0) {
-			int i = c-'A';
-			int m = 1 << (c - 'A');
 			//stop if hit edge (block)
-			if (fGrid.tileLetters[posId] != '*') {
+			if (c != '*') {
 				//no need to consider hooks as it won't be a hook point!
-				final int code = data[address];
-				if ((code & m) > 0) {
+				if (gaddag.isValidNextSymbol(address, c - 'A')) {
 					//iterate to next square
-					gen(nextAddress(address, code, i), posId + dimStep, wordScore + letterValuation.getNumber(fGrid.tileTiles[posId]), wordMultiplier, hookScore);
+					gen(gaddag.getNextAddressFromSymbol(address, c - 'A'), posId + dimStep, wordScore + letterValuation.getNumber(fGrid.tileTiles[posId]), wordMultiplier, hookScore);
 				}
 				return;
 			}
 		}
-		final int code = data[address];
-		if (fRack.anyUsed() && ((code & Magic.XP_WORD) > 0)) {
+		if (fRack.anyUsed() && gaddag.isValidWord(address)) {
 			//ensure there aren't unconsidered tiles to right (+ve) side of hook
 			if (dimStep > 0 || !mustRev) {
 				//record word!
@@ -112,10 +111,10 @@ public final class FastPlayGenerator {
 			//don't reverse into another hook point (as this will create dups)
 			return;
 		}
-		if ((code & Magic.XP_REV) > 0 && fGrid.tileLetters[hookId - dimStep] != '*') {
+		if (gaddag.isValidNextSymbol(address, MagicGaddag.POS_REV) && fGrid.tileLetters[hookId - dimStep] != '*') {
 			//consider reversal (in any chain you will only hit reversal once)
 			dimStep = -dimStep;
-			gen(nextAddress(address, code, Magic.POS_REV), hookId + dimStep, wordScore, wordMultiplier, hookScore);
+			gen(gaddag.getNextAddressFromSymbol(address, MagicGaddag.POS_REV), hookId + dimStep, wordScore, wordMultiplier, hookScore);
 			dimStep = -dimStep;
 		}
 		if (fGrid.tileLetters[posId] == '*') {
@@ -141,11 +140,11 @@ public final class FastPlayGenerator {
 			}
 			while (true) {
 				int m = 1 << letterCode;
-				if ((code & m) > 0 && (lmask & m) > 0) {
+				if (gaddag.isValidNextSymbol(address, letterCode) && (lmask & m) > 0) {
 					fRack.select(tileId, tile, (char)(letterCode + 'A'), posId);
 					//iterate to next square
 					int tileScore = letterValuation.getNumber(tile);
-					gen(nextAddress(address, code, letterCode), 
+					gen(gaddag.getNextAddressFromSymbol(address, letterCode), 
 							posId + dimStep, 
 							wordScore + (tileScore * (1+fGrid.squareLetterMultipliers[posId])), 
 							wordMultiplier * (1+fGrid.squareWordMultipliers[posId]), 
@@ -161,27 +160,9 @@ public final class FastPlayGenerator {
 		}
 	}
 
-	private int nextAddress(final int address, final int code, final int symbol) {
-		//determine offset
-		int lc = code << (31 - symbol);
-		int lc2 = lc >>> (31 - symbol);
-		int bits = numbits(lc2);
-		int nextAddress = data[address + bits];
-		return nextAddress;
-	}
 
-	private final static int[] bittable = {0, 1, 1, 2,  1, 2, 2, 3,  1, 2, 2, 3,  2, 3, 3, 4};
-	
-	public static int numbits (int v)
-	{
-	    int s = 0;
-	    while (v != 0)
-	    {
-	         s += bittable [v & 15];
-	         v = v >>> 4;
-	    }
-	    return s;
-	}
+
+
 
 	public int getDimStep() {
 		return dimStep;

@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 import net.codeyak.ndse.v1.WordList;
-import net.codeyak.ndse.v3.Magic;
 
 
 /**
@@ -45,121 +44,48 @@ public class Generator {
 		g.process(words);
 		g.printInfo();
 		
-		NodeArray na = new NodeArray();
+		MagicEncoder na = new MagicEncoder();
 		na.build(g.root);
-		System.out.println("size = "+na.head);
+		System.out.println("size = "+na.getSize());
 		
-		Magic magic = new Magic(Arrays.copyOf(na.MASTER, na.head));
+		MagicGaddag magic = new MagicGaddag(Arrays.copyOf(na.getEncoded(), na.getSize()));
 		
 		magic.test("FT");
 		magic.test("AXE");
 		magic.test("HHH");
 	}
 	
-	public Magic build(Collection<String> words) {
+	private Node root = new Node();
+	
+	private Map<Node,Node> nodeMap = new HashMap<Node, Node>();
+	
+	private int wordCount;
+	
+	public void build(Collection<String> words) {
 		populate(words);
 		process(words);
 		printInfo();
-		
-		NodeArray na = new NodeArray();
-		na.build(root);
-		System.out.println("size = "+na.head);
-		
-		Magic magic = new Magic(Arrays.copyOf(na.MASTER, na.head));
-		return magic;
 	}
 	
-	Node root = new Node();
+	public MagicGaddag getMagicGaddag() {
+		MagicEncoder me = new MagicEncoder();
+		me.build(root);
+		System.out.println("size = "+me.getSize());
+		
+		MagicGaddag gaddag = new MagicGaddag(Arrays.copyOf(me.getEncoded(), me.getSize()));
+		return gaddag;
+	}
 	
-	Map<Node,Node> nodeMap = new HashMap<Node, Node>();
+	public NodeGaddag getNodeGaddag() {
+		NodeGaddag gaddag = new NodeGaddag(Node.allNodes);
+		return gaddag;
+	}
 	
 	public void process(Collection<String> words) {
 		root.genHash();
 		
-		//root.print("\n");
-		//System.out.println();
-		//System.out.println();
-		
 		root.capture(nodeMap);
 		root.minimize(nodeMap);
-		
-		for (String word : words) {
-			//root.setTrav(rev(word.toCharArray()), 0);
-			trav(word);
-		}
-		//printTrav(500);
-		
-		
-		root.setFreq();
-		//printFreq(500);
-	}
-	
-	public char[] rev(char[] cs) {
-		char[] rv = new char[cs.length];
-		for (int i=0; i<cs.length; i++) {
-			rv[cs.length - 1 - i] = cs[i];
-		}
-		return rv;
-	}
-	
-	public void trav(String word) {
-		//System.out.println(word);
-		wordCount++;
-		final char[] cs = word.toCharArray();
-		
-		for (int i=0; i<cs.length-1; i++) {
-			char[] gen = new char[cs.length + 1];
-			for (int j=0; j<=i; j++) {
-				gen[i-j] = cs[j];
-			}
-			gen[i+1] = '#';
-			for (int j=i+1; j<cs.length; j++) {
-				gen[j+1] = cs[j];
-			}
-			root.setTrav(gen, 0);
-		}
-		//last entry with no reversal
-		char[] gen = new char[cs.length];
-		for (int i=0; i<cs.length; i++) {
-			gen[i] = cs[cs.length - 1 - i];
-		}
-		root.setTrav(gen, 0);
-	}
-	
-	public void printTrav(int num) {
-		List<Node> nodes = new ArrayList<Node>(nodeMap.keySet());
-		Collections.sort(nodes, new Comparator<Node>() {
-			@Override
-			public int compare(Node n1, Node n2) {
-				return n1.trav - n2.trav;
-			}
-		});
-		
-		int c = 1;
-		for (Node n : nodes) {
-			System.out.println("Node "+(c) + ": "+n.trav);
-			n.print("\n");
-			System.out.println();
-			if (c++ >= num) break;
-		}
-	}
-	
-	public void printFreq(int num) {
-		List<Node> nodes = new ArrayList<Node>(nodeMap.keySet());
-		Collections.sort(nodes, new Comparator<Node>() {
-			@Override
-			public int compare(Node n1, Node n2) {
-				return n2.freq - n1.freq;
-			}
-		});
-		
-		int c = 1;
-		for (Node n : nodes) {
-			System.out.println("Node "+(c) + ": "+n.freq);
-			n.print("\n");
-			System.out.println();
-			if (c++ >= num) break;
-		}
 	}
 	
 	public void populate(Collection<String> words) {
@@ -168,17 +94,18 @@ public class Generator {
 		}
 	}
 	
-	public void populateUni(Collection<String> words) {
-		for (String word : words) {
-			wordCount++;
-			record(word.toCharArray());
-		}
-	}
-	
-	private int wordCount;
-	
+	/**
+	 * Given a word ABC generate A#BC, BA#C, CBA. This represent playing ABC with letters before # being played right to left,
+	 * then after the #, being played left to right (from the initial letter).
+	 * So given positions 12345, starting at position 3
+	 * <br>A#BC means A at 3, B at 4, C at 5
+	 * <br>BA#C means B at 3, A at 2, C at 4
+	 * <br>CBA means C at 3, B at 2, A at 1
+	 * <br>So you can see that the data structure allows all possible play positions for a word to be evaluated for
+	 * a single hook point without any backtracking.
+	 * @param word
+	 */
 	public void populate(String word) {
-		//System.out.println(word);
 		wordCount++;
 		final char[] cs = word.toCharArray();
 		
@@ -201,14 +128,17 @@ public class Generator {
 		record(gen);
 	}
 	
+	/**
+	 * Record the letters in a Node structure
+	 * @param gen
+	 */
 	public void record(char[] gen) {
-		//System.out.println(new String(gen));
-		
+		//System.out.println(gen);
 		Node cur = root;
 		for (char c : gen) {
 			cur = cur.add(c);
 		}
-		cur.word = true;
+		cur.setValidWord(true);
 	}
 	
 	public void printInfo() {
