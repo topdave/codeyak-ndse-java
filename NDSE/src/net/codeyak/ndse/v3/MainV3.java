@@ -14,7 +14,7 @@ import net.codeyak.ndse.v3.gaddag.MagicGaddag;
 import net.codeyak.ndse.v3.gaddag.NodeGaddag;
 
 
-public class FastContainer {
+public class MainV3 {
 
 	public static void main(String[] args) throws IOException {
 		String language = "english";
@@ -75,6 +75,8 @@ public class FastContainer {
 		
 		System.out.println("games per second "+1000000000 / (fGameGen.tt / fGameGen.games));
 		System.out.println("turns per second "+1000000000 / (fGameGen.tt / fGameGen.turns));
+		
+		System.out.println("call FastPlayGenerate.gen "+FastPlayGenerator.genCalls+" times");
 		
 		//MagicGaddag magicGaddag = g.getMagicGaddag();
 		//magicGaddag.save(magicFile);

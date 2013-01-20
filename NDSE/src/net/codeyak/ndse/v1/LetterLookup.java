@@ -21,6 +21,13 @@ import java.util.Map;
 public abstract class LetterLookup {
 	protected Map<Character, Integer> lookup = new HashMap<Character, Integer>();
 	
+	public void multiply(int m) {
+		for (Character c : lookup.keySet()) {
+			int i = lookup.get(c);
+			lookup.put(c, i * m);
+		}
+	}
+	
 	public List<Character> getSortedLetters() {
 		List<Character> rv = new ArrayList<Character>(lookup.keySet());
 		Collections.sort(rv);

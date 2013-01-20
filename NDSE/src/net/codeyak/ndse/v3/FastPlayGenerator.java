@@ -10,6 +10,8 @@ public final class FastPlayGenerator {
 	
 	//static final int[] freqs = new int[2000000];
 	
+	public static long genCalls;
+	
 	private final IGaddag gaddag;
 	
 	public FastPlayGenerator(IGaddag gaddag) {
@@ -78,6 +80,7 @@ public final class FastPlayGenerator {
 	}
 	
 	private void gen(final int address, final int posId, final int wordScore, final int wordMultiplier, final int hookScore) {
+		genCalls++;
 		//consider letter mask (for hook points)
 		int lmask = (1 << 27) -1;
 		if (hookMaskMerged != null && fGrid.hookBitSet.isSet(posId)) {
@@ -159,10 +162,6 @@ public final class FastPlayGenerator {
 			}
 		}
 	}
-
-
-
-
 
 	public int getDimStep() {
 		return dimStep;
