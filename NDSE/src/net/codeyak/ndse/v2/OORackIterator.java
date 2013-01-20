@@ -1,5 +1,12 @@
 package net.codeyak.ndse.v2;
 
+/**
+ * complex class that iterates over a set of tiles, producing all length n combinations.
+ * Also supports playing the blank tile.
+ * 
+ * @author dave_blake
+ *
+ */
 public class OORackIterator {
 
 	private final OOTile[] tiles;

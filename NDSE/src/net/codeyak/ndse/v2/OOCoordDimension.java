@@ -1,5 +1,11 @@
 package net.codeyak.ndse.v2;
 
+/**
+ * provides names for each of the axes in the coordinate system
+ * 
+ * @author dave_blake
+ *
+ */
 public class OOCoordDimension {
 
 	private final int order;

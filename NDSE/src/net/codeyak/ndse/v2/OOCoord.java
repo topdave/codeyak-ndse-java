@@ -1,5 +1,11 @@
 package net.codeyak.ndse.v2;
 
+/**
+ * represents a coordinate in an n-dimensional Cartesian coordinate system
+ * 
+ * @author dave_blake
+ *
+ */
 public class OOCoord {
 
 	private final int id;

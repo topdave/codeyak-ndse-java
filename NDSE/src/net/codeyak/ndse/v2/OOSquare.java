@@ -1,6 +1,13 @@
 package net.codeyak.ndse.v2;
 
-
+/**
+ * represents a square on the board.
+ * Partial support support for an n-dimension board with use of OOCoord object, but still provides
+ * helper methods for getLeft, getRight etc
+ * 
+ * @author dave_blake
+ *
+ */
 public class OOSquare {
 	
 	public String toString() {

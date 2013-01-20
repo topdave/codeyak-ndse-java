@@ -7,10 +7,18 @@ import java.util.List;
 import net.codeyak.ndse.v1.RackIterator;
 import net.codeyak.ndse.v1.WordList;
 
-
-
 /**
- * a placement pattern
+ * A play placement pattern.
+ * Consists of a list of OOSquare that need to be filled with tiles to make a valid play following this pattern.
+ * Precomputes all the separate words that will be created as a result of this play.
+ * Also precomputes the scoring pattern - the multiple that will be applied to each individual tile, and the base score for the
+ * pattern. So if you play EXPIRATOR on 0,0 using the first R as a hook, the pattern will be 999[18]_999 + 59. Each tile will
+ * get 9x it's face value (because it's played across two triple word scores, and the fourth letter will be 18x because of the
+ * additional double letter score). The base score will be +9 from the preexisting R (worth 1 face value * 3 * 3 for triple word scores
+ * +50 for using all 7 tiles from the rack.
+ * <p>
+ * By breaking down all possible plays on a board into OOPattern's, the process of finding valid plays is simplified to just
+ * finding valid combinations of tile places, as can be seen from the succinct generatePlays method.
  * @author dave_blake
  *
  */

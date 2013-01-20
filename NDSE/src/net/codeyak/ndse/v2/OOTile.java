@@ -1,5 +1,11 @@
 package net.codeyak.ndse.v2;
 
+/**
+ * represents a tile, with a value and a letter.
+ * Potentially having an object for a tile would allow more exotic tiles like "any vowel" or "qu"
+ * @author dave_blake
+ *
+ */
 public class OOTile {
 	
 	final int id;

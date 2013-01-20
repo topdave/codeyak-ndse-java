@@ -2,7 +2,12 @@ package net.codeyak.ndse.v2;
 
 import java.util.Arrays;
 
-
+/**
+ * represents rack of tiles.
+ * Can pick tiles from bag, and supports taking a list of tiles from the rack.
+ * @author dave_blake
+ *
+ */
 public class OORack {
 
 	private final OOTile[] tiles;

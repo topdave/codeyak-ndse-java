@@ -1,5 +1,11 @@
 package net.codeyak.ndse.v2;
 
+/**
+ * provides simple utility method used by both OOPattern and OOPatternWord
+ * 
+ * @author dave_blake
+ *
+ */
 public class OOPatternScore {
 
 	public static String render(OOSquare[] squares, int[] tileMultipliers) {

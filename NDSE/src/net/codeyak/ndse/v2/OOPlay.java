@@ -2,6 +2,12 @@ package net.codeyak.ndse.v2;
 
 import java.util.Arrays;
 
+/**
+ * represents a potential play, by placing tiles in specified pattern.
+ * 
+ * @author dave_blake
+ *
+ */
 public class OOPlay implements Comparable<OOPlay> {
 	private final OOPattern pattern;
 	private final OOTile[] tiles;

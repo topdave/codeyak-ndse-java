@@ -1,5 +1,12 @@
 package net.codeyak.ndse.v2;
 
+/**
+ * represents an individual word created as the result of a pattern. 
+ * The isValid method determines whether the tile placed on a given square generates a valid word, or valid fragment of a word.
+ * 
+ * @author dave_blake
+ *
+ */
 public class OOPatternWord {
 	private OODirection direction;
 	/**

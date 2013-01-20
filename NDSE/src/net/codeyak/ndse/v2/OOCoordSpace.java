@@ -1,5 +1,10 @@
 package net.codeyak.ndse.v2;
 
+/**
+ * represents an n-dimensional Cartesian coordinate system
+ * @author dave_blake
+ *
+ */
 public class OOCoordSpace {
 
 	private final OOCoordDimension[] dimensions;
