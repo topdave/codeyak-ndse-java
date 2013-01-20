@@ -4,14 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
-import net.codeyak.ndse.v1.Board;
 import net.codeyak.ndse.v1.LetterDistribution;
 import net.codeyak.ndse.v1.LetterValuation;
-import net.codeyak.ndse.v1.WordList;
-import net.codeyak.ndse.v3.gaddag.Generator;
 import net.codeyak.ndse.v3.gaddag.IGaddag;
 import net.codeyak.ndse.v3.gaddag.MagicGaddag;
-import net.codeyak.ndse.v3.gaddag.NodeGaddag;
 
 
 public class MainV3b {
@@ -58,6 +54,6 @@ public class MainV3b {
 		System.out.println("games per second "+1000000000 / (fGameGen.tt / fGameGen.games));
 		System.out.println("turns per second "+1000000000 / (fGameGen.tt / fGameGen.turns));
 		
-		System.out.println("call FastPlayGenerate.gen "+FastPlayGenerator.genCalls+" times");
+		System.out.println("called FastPlayGenerate.gen "+FastPlayGenerator.genCalls+" times");
 	}
 }

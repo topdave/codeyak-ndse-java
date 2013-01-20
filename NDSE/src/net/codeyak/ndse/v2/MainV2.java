@@ -98,7 +98,7 @@ public class MainV2 {
 			rack.pick(bag);
 			//System.out.println(rack);
 			
-			long st = System.nanoTime();
+			//long st = System.nanoTime();
 			List<OOPattern> patterns = ooBoard.getPatterns(rack.getCount());
 			Map<OOPattern, List<OOPlay>> playMap = new HashMap<OOPattern, List<OOPlay>>();
 			for (OOPattern pattern : patterns) {
@@ -106,7 +106,7 @@ public class MainV2 {
 				if (plays.size() > 0) 
 					playMap.put(pattern, plays);
 			}
-			long et = System.nanoTime();
+			//long et = System.nanoTime();
 			//System.out.println("generated all play in "+(et-st)/1000000+"ms");
 			
 			//choose a play

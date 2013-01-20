@@ -11,7 +11,6 @@ import net.codeyak.ndse.v1.WordList;
 import net.codeyak.ndse.v3.gaddag.Generator;
 import net.codeyak.ndse.v3.gaddag.IGaddag;
 import net.codeyak.ndse.v3.gaddag.MagicGaddag;
-import net.codeyak.ndse.v3.gaddag.NodeGaddag;
 
 
 public class MainV3 {
@@ -47,15 +46,9 @@ public class MainV3 {
 		File magicFile = new File(rootFolder, "words/gaddag/gaddag."+dictionary+".bin");
 		gaddag = new MagicGaddag(magicFile);
 		
-		//Bag bag = new Bag(ld);
-		//Rack rack = new Rack(7);
-		//rack.pick(bag);
-		//Rack rack = new Rack("AI");
-		
 		Random seed = new Random(5);
 		System.gc();
 		
-		//System.out.println(fGrid.toIdString());
 		int games = 100;
 		
 		FastGameGenerator fGameGen = new FastGameGenerator();
