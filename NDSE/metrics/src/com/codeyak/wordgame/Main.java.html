@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
+<META NAME="GENERATOR" CONTENT="Java2HTML Version 1.5">
+<TITLE>com.codeyak.wordgame.Main (Java2HTML)</TITLE>
+</HEAD>
+<BODY><TABLE id="Header" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td colspan="2" width="33%">&nbsp;</td>
+<td align="center" colspan="2" width="33%">
+<font size="4">Main.java</font>
+</td>
+<td align="right" colspan="2" width="33%">&nbsp;</td>
+</tr>
+</TABLE>
+<pre ID="Classes">
+<FONT ID="LN">1   </FONT><A NAME="1"></A><FONT ID="Package">package</FONT> com.codeyak.wordgame;
+<FONT ID="LN">2   </FONT><A NAME="2"></A>
+<FONT ID="LN">3   </FONT><A NAME="3"></A><FONT ID="Import">import</FONT> java.io.File;
+<FONT ID="LN">4   </FONT><A NAME="4"></A><FONT ID="Import">import</FONT> java.util.Arrays;
+<FONT ID="LN">5   </FONT><A NAME="5"></A>
+<FONT ID="LN">6   </FONT><A NAME="6"></A><FONT ID="Import">import</FONT> <A HREF="../../../com/codeyak/wordgame/bag/Bag.java.html">com.codeyak.wordgame.bag.Bag</A>;
+<FONT ID="LN">7   </FONT><A NAME="7"></A><FONT ID="Import">import</FONT> <A HREF="../../../com/codeyak/wordgame/board/Board.java.html">com.codeyak.wordgame.board.Board</A>;
+<FONT ID="LN">8   </FONT><A NAME="8"></A><FONT ID="Import">import</FONT> <A HREF="../../../com/codeyak/wordgame/letters/LetterDistribution.java.html">com.codeyak.wordgame.letters.LetterDistribution</A>;
+<FONT ID="LN">9   </FONT><A NAME="9"></A><FONT ID="Import">import</FONT> <A HREF="../../../com/codeyak/wordgame/letters/LetterValuation.java.html">com.codeyak.wordgame.letters.LetterValuation</A>;
+<FONT ID="LN">10  </FONT><A NAME="10"></A><FONT ID="Import">import</FONT> <A HREF="../../../com/codeyak/wordgame/words/WordList.java.html">com.codeyak.wordgame.words.WordList</A>;
+<FONT ID="LN">11  </FONT><A NAME="11"></A>
+<FONT ID="LN">12  </FONT><A NAME="12"></A><FONT ID="Public">public</FONT> <FONT ID="Class">class</FONT> Main {
+<FONT ID="LN">13  </FONT><A NAME="13"></A>
+<FONT ID="LN">14  </FONT><A NAME="14"></A>    <FONT ID="Public">public</FONT> <FONT ID="Static">static</FONT> <FONT ID="Void">void</FONT> main(String[] args) {
+<FONT ID="LN">15  </FONT><A NAME="15"></A>        String language = <FONT ID="StringLiteral">"english"</FONT>;
+<FONT ID="LN">16  </FONT><A NAME="16"></A>        String game = <FONT ID="StringLiteral">"Scrabble"</FONT>;
+<FONT ID="LN">17  </FONT><A NAME="17"></A>        
+<FONT ID="LN">18  </FONT><A NAME="18"></A>        File rootFolder = <FONT ID="New">new</FONT> File(<FONT ID="StringLiteral">"data"</FONT>);
+<FONT ID="LN">19  </FONT><A NAME="19"></A>        
+<FONT ID="LN">20  </FONT><A NAME="20"></A>        <A HREF="../../../com/codeyak/wordgame/letters/LetterDistribution.java.html">LetterDistribution</A> ld = <FONT ID="New">new</FONT> <A HREF="../../../com/codeyak/wordgame/letters/LetterDistribution.java.html">LetterDistribution</A>(<FONT ID="New">new</FONT> File(rootFolder, <FONT ID="StringLiteral">"letters/"</FONT>+language+<FONT ID="StringLiteral">"/"</FONT>+game+<FONT ID="StringLiteral">"Distribution.txt"</FONT>));
+<FONT ID="LN">21  </FONT><A NAME="21"></A>        System.out.println(ld.getTotal());
+<FONT ID="LN">22  </FONT><A NAME="22"></A>        System.out.println(ld.toGrid(<FONT ID="IntegerLiteral">10</FONT>));
+<FONT ID="LN">23  </FONT><A NAME="23"></A>        System.out.println(ld);
+<FONT ID="LN">24  </FONT><A NAME="24"></A>        
+<FONT ID="LN">25  </FONT><A NAME="25"></A>        <A HREF="../../../com/codeyak/wordgame/letters/LetterValuation.java.html">LetterValuation</A> lv = <FONT ID="New">new</FONT> <A HREF="../../../com/codeyak/wordgame/letters/LetterValuation.java.html">LetterValuation</A>(<FONT ID="New">new</FONT> File(rootFolder, <FONT ID="StringLiteral">"letters/"</FONT>+language+<FONT ID="StringLiteral">"/"</FONT>+game+<FONT ID="StringLiteral">"Valuation.txt"</FONT>));
+<FONT ID="LN">26  </FONT><A NAME="26"></A>        System.out.println(lv.getLetters());
+<FONT ID="LN">27  </FONT><A NAME="27"></A>        System.out.println(lv);
+<FONT ID="LN">28  </FONT><A NAME="28"></A>        
+<FONT ID="LN">29  </FONT><A NAME="29"></A>        <A HREF="../../../com/codeyak/wordgame/board/Board.java.html">Board</A> board = <FONT ID="New">new</FONT> <A HREF="../../../com/codeyak/wordgame/board/Board.java.html">Board</A>(<FONT ID="New">new</FONT> File(rootFolder, <FONT ID="StringLiteral">"boards/"</FONT>+game+<FONT ID="StringLiteral">"Board.txt"</FONT>));
+<FONT ID="LN">30  </FONT><A NAME="30"></A>        System.out.println(board);
+<FONT ID="LN">31  </FONT><A NAME="31"></A>        
+<FONT ID="LN">32  </FONT><A NAME="32"></A>        <A HREF="../../../com/codeyak/wordgame/words/WordList.java.html">WordList</A> words = <FONT ID="New">new</FONT> <A HREF="../../../com/codeyak/wordgame/words/WordList.java.html">WordList</A>(<FONT ID="New">new</FONT> File(rootFolder, <FONT ID="StringLiteral">"words/opusthepenguin.wordpress.com/TWL06.txt"</FONT>));
+<FONT ID="LN">33  </FONT><A NAME="33"></A>        System.out.println(words.getSize());
+<FONT ID="LN">34  </FONT><A NAME="34"></A>        <FONT ID="SingleLineComment">//System.out.println(words);
+<FONT ID="LN">35  </FONT><A NAME="35"></A></FONT>        
+<FONT ID="LN">36  </FONT><A NAME="36"></A>        <A HREF="../../../com/codeyak/wordgame/bag/Bag.java.html">Bag</A> bag = <FONT ID="New">new</FONT> <A HREF="../../../com/codeyak/wordgame/bag/Bag.java.html">Bag</A>(ld);
+<FONT ID="LN">37  </FONT><A NAME="37"></A>        StringBuilder tileOrder = <FONT ID="New">new</FONT> StringBuilder();
+<FONT ID="LN">38  </FONT><A NAME="38"></A>        <FONT ID="While">while</FONT> (bag.getRemaining() &gt; <FONT ID="IntegerLiteral">0</FONT>) {
+<FONT ID="LN">39  </FONT><A NAME="39"></A>            <FONT ID="Char">char</FONT>[] tiles = bag.pick(<FONT ID="IntegerLiteral">7</FONT>);
+<FONT ID="LN">40  </FONT><A NAME="40"></A>            bag.putBack(tiles);
+<FONT ID="LN">41  </FONT><A NAME="41"></A>            tiles = bag.pick(<FONT ID="IntegerLiteral">5</FONT>);
+<FONT ID="LN">42  </FONT><A NAME="42"></A>            tileOrder.append(tiles);
+<FONT ID="LN">43  </FONT><A NAME="43"></A>        }
+<FONT ID="LN">44  </FONT><A NAME="44"></A>        <FONT ID="Char">char</FONT>[] ordering = tileOrder.toString().toCharArray();
+<FONT ID="LN">45  </FONT><A NAME="45"></A>        Arrays.sort(ordering);
+<FONT ID="LN">46  </FONT><A NAME="46"></A>        System.out.println(<FONT ID="StringLiteral">"bag match to original : "</FONT> + Arrays.equals(ordering, ld.getTiles()));
+<FONT ID="LN">47  </FONT><A NAME="47"></A>        
+<FONT ID="LN">48  </FONT><A NAME="48"></A>        <A HREF="../../../com/codeyak/wordgame/BoardState.java.html">BoardState</A> state = <FONT ID="New">new</FONT> <A HREF="../../../com/codeyak/wordgame/BoardState.java.html">BoardState</A>(board);
+<FONT ID="LN">49  </FONT><A NAME="49"></A>    }
+<FONT ID="LN">50  </FONT><A NAME="50"></A>    
+<FONT ID="LN">51  </FONT><A NAME="51"></A>}
+<FONT ID="LN">52  </FONT><A NAME="52"></A></pre>
+</BODY>
+</HTML>
