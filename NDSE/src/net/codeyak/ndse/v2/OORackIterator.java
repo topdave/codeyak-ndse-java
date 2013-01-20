@@ -31,7 +31,7 @@ public class OORackIterator {
 	 * maintains used and current vectors
 	 * 
 	 * @param pos
-	 * @return
+	 * @return next tile to consider
 	 */
 	public OOTile next(int pos) {
 		//check if pos beyond length of array

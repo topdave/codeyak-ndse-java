@@ -100,7 +100,7 @@ public class OOWordList {
 	 * is the string a valid word
 	 * 
 	 * @param word
-	 * @return
+	 * @return true if word is in dictionary
 	 */
 	public boolean isWord(String word) {
 		return wordSet.contains(word);
